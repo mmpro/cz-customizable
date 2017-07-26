@@ -96,7 +96,7 @@ module.exports = {
       {
         type: 'input',
         name: 'footer',
-        message: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
+        message: 'List any ISSUES RELATED to this change (optional). E.g.: #31, #34:\n',
         when: isNotWip
       },
       {

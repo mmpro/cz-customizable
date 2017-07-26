@@ -12,10 +12,10 @@
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "homepage": "https://github.com/leonardoanalista/cz-customizable",
+  "homepage": "https://github.com/mmpro/cz-customizable",
   "repository": {
     "type": "git",
-    "url": "https://github.com/leonardoanalista/cz-customizable.git"
+    "url": "https://github.com/mmpro/cz-customizable.git"
   },
   "author": "Leonardo Correa <leonardoanalista@gmail.com>",
   "contributors": [
