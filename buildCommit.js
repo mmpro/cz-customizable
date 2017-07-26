@@ -55,7 +55,7 @@ module.exports = function buildCommit(answers) {
     result += '\n\n' + 'BREAKING CHANGE:\n' + breaking;
   }
   if (footer) {
-    result += '\n\nISSUES CLOSED: ' + footer;
+    result += '\n\nRELATED ISSUES: ' + footer;
   }
 
   return escapeSpecialChars(result);

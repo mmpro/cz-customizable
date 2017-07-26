@@ -95,7 +95,7 @@ describe('cz-customizable', function() {
     var mockCz = getMockedCz(answers);
     module.prompter(mockCz, commit);
 
-    expect(commit).toHaveBeenCalledWith('feat(myScope): create a new cool feature\n\n-line1\n-line2\n\nBREAKING CHANGE:\nbreaking\n\nISSUES CLOSED: my footer');
+    expect(commit).toHaveBeenCalledWith('feat(myScope): create a new cool feature\n\n-line1\n-line2\n\nBREAKING CHANGE:\nbreaking\n\nRELATED ISSUES: my footer');
   });
 
   it('should call commit() function with commit message with the minimal required fields', function() {
@@ -162,7 +162,7 @@ describe('cz-customizable', function() {
   it('should truncate first line if number of characters is higher than 200', function() {
     var chars_100 = '0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789';
 
-    // this string will be prepend: "ISSUES CLOSED: " = 15 chars
+    // this string will be prepend: "RELATED ISSUES: " = 15 chars
     var footerChars_100 = '0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-012345';
 
     var answers = {
@@ -188,7 +188,7 @@ describe('cz-customizable', function() {
 
     //it should wrap footer
     var footer = commit.mostRecentCall.args[0].split('\n\n')[2];
-    expect(footer).toEqual('ISSUES CLOSED: ' + footerChars_100 + '\nfooter-second-line');
+    expect(footer).toEqual('RELATED ISSUES: ' + footerChars_100 + '\nfooter-second-line');
 
   });
 
