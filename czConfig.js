@@ -16,10 +16,10 @@ module.exports = {
   ],
 
   scopes: [
-    {name: 'accounts'},
-    {name: 'admin'},
-    {name: 'exampleScope'},    
-    {name: 'changeMe'}
+    {name: 'Overview'},
+    {name: 'MediaContainer'},
+    {name: 'MediaContainer'},
+    {name: 'Settings - Tags'}
   ],
 
   // it needs to match the value for field type. Eg.: 'fix'
@@ -35,7 +35,7 @@ module.exports = {
   },
   */
 
-  allowCustomScopes: true,
+  allowCustomScopes: false,
   allowBreakingChanges: ['feat', 'fix']
 
 };

@@ -1,14 +1,14 @@
 'use strict';
 
 
-var wrap = require('word-wrap');
+const wrap = require('word-wrap');
 
 
 module.exports = function buildCommit(answers) {
 
-  var maxLineWidth = 100;
+  const maxLineWidth = 100;
 
-  var wrapOptions = {
+  const wrapOptions = {
     trim: true,
     newline: '\n',
     indent:'',
@@ -17,7 +17,6 @@ module.exports = function buildCommit(answers) {
 
   function addScope(scope) {
     if (!scope) return ': '; //it could be type === WIP. So there is no scope
-
     return '(' + scope.trim() + '): ';
   }
 
@@ -26,7 +25,7 @@ module.exports = function buildCommit(answers) {
   }
 
   function escapeSpecialChars(result) {
-    var specialChars = ['\`'];
+    const specialChars = ['\`'];
 
     specialChars.map(function (item) {
       // For some strange reason, we have to pass additional '\' slash to commitizen. Total slashes are 4.
@@ -38,24 +37,31 @@ module.exports = function buildCommit(answers) {
   }
 
   // Hard limit this line
-  var head = (answers.type + addScope(answers.scope) + addSubject(answers.subject)).slice(0, maxLineWidth);
+  let head = (answers.type + addScope(answers.scope) + addSubject(answers.subject)).slice(0, maxLineWidth);
+  if (answers.committer) {
+    head += ' | ' + answers.committer
+  }
 
   // Wrap these lines at 100 characters
-  var body = wrap(answers.body, wrapOptions) || '';
+  let body = wrap(answers.body, wrapOptions) || '';
   body = body.split('|').join('\n');
 
-  var breaking = wrap(answers.breaking, wrapOptions);
-  var footer = wrap(answers.footer, wrapOptions);
+  const breaking = wrap(answers.breaking, wrapOptions);
+  const footer = wrap(answers.footer, wrapOptions);
 
-  var result = head;
+  let result = head;
   if (body) {
     result += '\n\n' + body;
   }
+  if (answers.relatedIssues) {
+    result += ' - related: ' + answers.relatedIssues
+  }
+
   if (breaking) {
     result += '\n\n' + 'BREAKING CHANGE:\n' + breaking;
   }
   if (footer) {
-    result += '\n\nRELATED ISSUES: ' + footer;
+    result += '\n\nClosed: ' + footer;
   }
 
   return escapeSpecialChars(result);

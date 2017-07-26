@@ -1,11 +1,11 @@
 'use strict';
 
 
-var buildCommit = require('./buildCommit');
-var log = require('winston');
+const buildCommit = require('./buildCommit');
+const log = require('winston');
 
 
-var isNotWip = function(answers) {
+const isNotWip = function(answers) {
   return answers.type.toLowerCase() !== 'wip';
 };
 
@@ -16,7 +16,7 @@ module.exports = {
     // normalize config optional options
     config.scopeOverrides = config.scopeOverrides || {};
 
-    var questions = [
+    const questions = [
       {
         type: 'list',
         name: 'type',
@@ -73,14 +73,20 @@ module.exports = {
         validate: function(value) {
           return !!value;
         },
-        filter: function(value) {
-          return value.charAt(0).toLowerCase() + value.slice(1);
-        }
       },
       {
         type: 'input',
         name: 'body',
-        message: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
+        message: 'Provide a good LONGER description of the change. Use "|" to break new line:\n',
+        validate: function(value) {
+          return !!value;
+        }
+      },
+      {
+        type: 'input',
+        name: 'relatedIssues',
+        message: 'List any ISSUES RELATED to this change (optional). E.g.: #31, #34 - will be added to body:\n',
+        when: isNotWip
       },
       {
         type: 'input',
@@ -95,10 +101,20 @@ module.exports = {
       },
       {
         type: 'input',
+        name: 'comitterInitials',
+        message: 'Your initials please - they will become part of the changelog:\n',
+        validate: function(value) {
+          return !!value && value.length === 2
+        }
+      },
+      /* our workflow does not allow closing issues by committing
+      {
+        type: 'input',
         name: 'footer',
         message: 'List any ISSUES RELATED to this change (optional). E.g.: #31, #34:\n',
         when: isNotWip
       },
+      */
       {
         type: 'expand',
         name: 'confirmCommit',
@@ -108,7 +124,7 @@ module.exports = {
           { key: 'e', name: 'Edit message', value: 'edit' }
         ],
         message: function(answers) {
-          var SEP = '###--------------------------------------------------------###';
+          const SEP = '###--------------------------------------------------------###';
           log.info('\n' + SEP + '\n' + buildCommit(answers) + '\n' + SEP + '\n');
           return 'Are you sure you want to proceed with the commit above?';
         }

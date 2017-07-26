@@ -1,3 +1,10 @@
+# Version Info AdmiralCloud
+This fork has been adapted for the use of AdmiralCloud. 
++ issues are only related and added to the body, but never closes
++ initials of committer are required and added to the subject line
++ long description is required
++ scopes are pre-defined
+
 # cz-customizable
 
 The customizable Commitizen plugin to help achieve consistent commit messages like the [AngularJS team](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
