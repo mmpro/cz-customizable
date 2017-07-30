@@ -20,7 +20,7 @@ module.exports = {
     {name: 'MediaContainer'},
     {name: 'MediaContainer'},
     {name: 'Settings - Tags'},
-    {name: 'Settings - Misc'}
+    {name: 'Misc'}
   ],
 
   // it needs to match the value for field type. Eg.: 'fix'
