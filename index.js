@@ -23,7 +23,7 @@ function readConfigFile() {
     }
     else {
       // fallback to module's config
-      pkgPath = path.resolve('./czConfig.js');
+      pkgPath = './czConfig.js';
     }
     return require(pkgPath);
   }
@@ -51,16 +51,19 @@ module.exports = {
                 if (code === 0) {
                   const commitStr = fs.readFileSync(info.path, { encoding: 'utf8' });
                   commit(commitStr);
-                } else {
+                }
+                else {
                   log.info('Editor returned non zero value. Commit message was:\n' + buildCommit(answers));
                 }
               });
             });
           }
         });
-      } else if (answers.confirmCommit === 'yes') {
+      }
+      else if (answers.confirmCommit === 'yes') {
         commit(buildCommit(answers));
-      } else {
+      }
+      else {
         log.info('Commit has been canceled.');
       }
     });

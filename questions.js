@@ -28,10 +28,11 @@ module.exports = {
         name: 'scope',
         message: '\nDenote the SCOPE of this change (optional):',
         choices: function(answers) {
-          var scopes = [];
+          let scopes = [];
           if (config.scopeOverrides[answers.type]) {
             scopes = scopes.concat(config.scopeOverrides[answers.type]);
-          } else {
+          }
+          else {
             scopes = scopes.concat(config.scopes);
           }
           if (config.allowCustomScopes || scopes.length === 0) {
@@ -44,16 +45,18 @@ module.exports = {
           return scopes;
         },
         when: function(answers) {
-          var hasScope = false;
+          let hasScope = false;
           if (config.scopeOverrides[answers.type]) {
             hasScope = !!(config.scopeOverrides[answers.type].length > 0);
-          } else {
+          }
+          else {
             hasScope = !!(config.scopes && (config.scopes.length > 0));
           }
           if (!hasScope) {
             answers.scope = 'custom';
             return false;
-          } else {
+          }
+          else {
             return isNotWip(answers);
           }
         }
@@ -71,8 +74,8 @@ module.exports = {
         name: 'subject',
         message: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
         validate: function(value) {
-          return !!value;
-        },
+          return !!value
+        }
       },
       {
         type: 'input',

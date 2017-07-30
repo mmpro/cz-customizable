@@ -45,10 +45,10 @@
       "path": "./index.js"
     },
     "cz-customizable": {
-      "config": "cz-config-EXAMPLE.js"
+      "config": "czConfig.js"
     },
     "ghooks": {
-      "pre-commit": "npm run eslint && npm run test"
+      "pre-commit": "eslint && npm run test"
     }
   }
 }

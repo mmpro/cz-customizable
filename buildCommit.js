@@ -1,6 +1,5 @@
 'use strict';
 
-
 const wrap = require('word-wrap');
 
 
@@ -38,8 +37,8 @@ module.exports = function buildCommit(answers) {
 
   // Hard limit this line
   let head = (answers.type + addScope(answers.scope) + addSubject(answers.subject)).slice(0, maxLineWidth);
-  if (answers.committer) {
-    head += ' | ' + answers.committer
+  if (answers.comitterInitials) {
+    head += ' | ' + answers.comitterInitials
   }
 
   // Wrap these lines at 100 characters
