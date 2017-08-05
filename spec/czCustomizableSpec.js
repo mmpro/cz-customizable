@@ -7,26 +7,7 @@ describe('cz-customizable', function() {
   var rewire = require('rewire');
 
   beforeEach(function() {
-    module = rewire('../index.js');
-
-    module.__set__({
-      // it mocks winston logging tool
-      log: {
-        info: function() {}
-      },
-
-      readConfigFile: function() {
-        return {
-          types: [{value: 'feat', name: 'feat: my feat'}],
-          scopes: [{name: 'myScope'}],
-          scopeOverrides: {
-            fix: [{name: 'fixOverride'}]
-          },
-          allowCustomScopes: true,
-          allowBreakingChanges: ['feat']
-        };
-      }
-    });
+    module = require('../index.js');
 
     cz = jasmine.createSpyObj('cz', ['prompt', 'Separator']);
     commit = jasmine.createSpy();
@@ -95,7 +76,7 @@ describe('cz-customizable', function() {
     var mockCz = getMockedCz(answers);
     module.prompter(mockCz, commit);
 
-    expect(commit).toHaveBeenCalledWith('feat(myScope): create a new cool feature\n\n-line1\n-line2\n\nBREAKING CHANGE:\nbreaking\n\nRELATED ISSUES: my footer');
+    expect(commit).toHaveBeenCalledWith('feat(myScope): create a new cool feature\n\n-line1\n-line2\n\nBREAKING CHANGE:\nbreaking\n\nClosed: my footer');
   });
 
   it('should call commit() function with commit message with the minimal required fields', function() {
@@ -188,7 +169,7 @@ describe('cz-customizable', function() {
 
     //it should wrap footer
     var footer = commit.mostRecentCall.args[0].split('\n\n')[2];
-    expect(footer).toEqual('RELATED ISSUES: ' + footerChars_100 + '\nfooter-second-line');
+    expect(footer).toEqual('Closed: ' + footerChars_100 + '\nfooter-second-line');
 
   });
 

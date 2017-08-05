@@ -7,7 +7,6 @@ module.exports = {
     repoUrl: 'ACCOUNT/REPO/'
   },
 
-
   types: [
     {value: 'feat',     name: 'feat:     A new feature'},
     {value: 'fix',      name: 'fix:      A bug fix'},
@@ -22,27 +21,15 @@ module.exports = {
   ],
 
   scopes: [
-    {name: 'Overview'},
-    {name: 'MediaContainer'},
-    {name: 'MediaContainer'},
-    {name: 'Settings - Tags'},
-    {name: 'Misc'}
+    {name: 'myScope'}
   ],
 
   // it needs to match the value for field type. Eg.: 'fix'
-  /*
   scopeOverrides: {
-    fix: [
-
-      {name: 'merge'},
-      {name: 'style'},
-      {name: 'e2eTest'},
-      {name: 'unitTest'}
-    ]
+    fix: [{name: 'fixOverride'}]
   },
-  */
 
   allowCustomScopes: false,
-  allowBreakingChanges: ['feat', 'fix']
+  allowBreakingChanges: ['feat']
 
 };

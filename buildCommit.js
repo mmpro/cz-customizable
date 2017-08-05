@@ -1,12 +1,13 @@
 'use strict';
 
 const wrap = require('word-wrap');
+const path = require('path');
 
-/***
- * Optional config
- */
+const configFile = require('./readConfigFile');
 
-module.exports = function buildCommit(answers, config) {
+module.exports = function buildCommit(answers) {
+
+  const config = configFile()
 
   const maxLineWidth = 100;
 
@@ -68,6 +69,7 @@ module.exports = function buildCommit(answers, config) {
     // e.g. #320, mmpro/ac-client#123
     issues.forEach(function(issue) {
       issue = issue.trim()
+      let link = issue
       let url = config.repository.baseUrl
       if (issue.indexOf('#') === 0) {
         // this repo
@@ -80,7 +82,7 @@ module.exports = function buildCommit(answers, config) {
         issue = parts[1]
         url += parts[0] + '/issues/' + issue
       }
-      result += '[\#' + issue + '](' + url + ')'
+      result += '[\#' + link + '](' + url + ')'
     })
   }
 
