@@ -45,7 +45,7 @@ module.exports = {
         temp.open(null, function(err, info) {
           /* istanbul ignore else */
           if (!err) {
-            fs.write(info.fd, buildCommit(answers));
+            fs.write(info.fd, buildCommit(answers, config));
             fs.close(info.fd, function(err) {
               editor(info.path, function (code, sig) {
                 if (code === 0) {
@@ -53,7 +53,7 @@ module.exports = {
                   commit(commitStr);
                 }
                 else {
-                  log.info('Editor returned non zero value. Commit message was:\n' + buildCommit(answers));
+                  log.info('Editor returned non zero value. Commit message was:\n' + buildCommit(answers, config));
                 }
               });
             });
@@ -61,7 +61,7 @@ module.exports = {
         });
       }
       else if (answers.confirmCommit === 'yes') {
-        commit(buildCommit(answers));
+        commit(buildCommit(answers, config));
       }
       else {
         log.info('Commit has been canceled.');

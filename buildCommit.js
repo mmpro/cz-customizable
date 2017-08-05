@@ -2,8 +2,11 @@
 
 const wrap = require('word-wrap');
 
+/***
+ * Optional config
+ */
 
-module.exports = function buildCommit(answers) {
+module.exports = function buildCommit(answers, config) {
 
   const maxLineWidth = 100;
 
@@ -13,6 +16,7 @@ module.exports = function buildCommit(answers) {
     indent:'',
     width: maxLineWidth
   };
+
 
   function addScope(scope) {
     if (!scope) return ': '; //it could be type === WIP. So there is no scope
@@ -43,6 +47,7 @@ module.exports = function buildCommit(answers) {
 
   // Wrap these lines at 100 characters
   let body = wrap(answers.body, wrapOptions) || '';
+  let bodyLines = body.split('|').length
   body = body.split('|').join('\n');
 
   const breaking = wrap(answers.breaking, wrapOptions);
@@ -53,7 +58,17 @@ module.exports = function buildCommit(answers) {
     result += '\n\n' + body;
   }
   if (answers.relatedIssues) {
-    result += ' - related: ' + answers.relatedIssues
+    if (bodyLines > 1) {
+      result += '\nRelated: '
+    }
+    else {
+      result += ' - related: '
+    }
+    let issues = answers.relatedIssues.split(',')
+    issues.forEach(function(issue){
+      issue = issue.trim().substr(1)
+      result += '[\#' + issue + '](' + config.repositoryBaseUrl + '/issues/' + issue + ')'
+    })
   }
 
   if (breaking) {
