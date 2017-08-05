@@ -65,9 +65,22 @@ module.exports = function buildCommit(answers, config) {
       result += ' - related: '
     }
     let issues = answers.relatedIssues.split(',')
-    issues.forEach(function(issue){
-      issue = issue.trim().substr(1)
-      result += '[\#' + issue + '](' + config.repositoryBaseUrl + '/issues/' + issue + ')'
+    // e.g. #320, mmpro/ac-client#123
+    issues.forEach(function(issue) {
+      issue = issue.trim()
+      let url = config.repository.baseUrl
+      if (issue.indexOf('#') === 0) {
+        // this repo
+        issue = issue.substr(1)
+        url += config.repository.repoUrl + 'issues/' + issue
+      }
+      else {
+        // other/external repo - e.g. mmpro/ac-client#123
+        let parts = issue.split('#')
+        issue = parts[1]
+        url += parts[0] + '/issues/' + issue
+      }
+      result += '[\#' + issue + '](' + url + ')'
     })
   }
 
