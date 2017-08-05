@@ -82,7 +82,7 @@ module.exports = function buildCommit(answers) {
         issue = parts[1]
         url += parts[0] + '/issues/' + issue
       }
-      result += '[\#' + link + '](' + url + ')'
+      result += '[' + link + '](' + url + ')'
     })
   }
 
