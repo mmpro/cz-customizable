@@ -1,3 +1,5 @@
+'use strict';
+
 const findConfig = require('find-config');
 const path = require('path');
 const log = require('winston');
