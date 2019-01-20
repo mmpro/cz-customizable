@@ -135,7 +135,7 @@ describe('cz-customizable', function() {
     module.prompter(mockCz, commit);
 
     setTimeout(function() {
-      expect(commit.wasCalled).toEqual(false);
+      expect(commit.wasCalled).toEqual(undefined);
       done();
     }, 100);
   });
