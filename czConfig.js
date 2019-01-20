@@ -6,7 +6,6 @@ module.exports = {
     baseUrl: 'https://github.com/',
     repoUrl: 'ACCOUNT/REPO/'
   },
-
   types: [
     {value: 'feat',     name: 'feat:     A new feature'},
     {value: 'fix',      name: 'fix:      A bug fix'},

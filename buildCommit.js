@@ -69,7 +69,6 @@ module.exports = function buildCommit(answers) {
     // e.g. #320, mmpro/ac-client#123
     issues.forEach(function(issue) {
       issue = issue.trim()
-      let link = issue
       let url = config.repository.baseUrl
       if (issue.indexOf('#') === 0) {
         // this repo
@@ -82,7 +81,7 @@ module.exports = function buildCommit(answers) {
         issue = parts[1]
         url += parts[0] + '/issues/' + issue
       }
-      result += '[' + link + '](' + url + ')'
+      result += '[\#' + issue + '](' + url + ')'
     })
   }
 
